@@ -7,9 +7,11 @@
 - DFS 타고 다음 단계로 넘어갈때, 변화되는 값들을 DFS 매개변수로 넣어준다.
 - 하나의 경우의 DFS가 끝나고 다시 이전으로 돌아가기 위해, copy를 미리 해둔다.
 
-### 코드 예시
+### 코드
 
 ```
+swea_5656_벽돌깨기
+
 private static void process(int[][] map, int cnt) { //map: 이전 벽돌 모습
 		
   if(cnt==N) {
