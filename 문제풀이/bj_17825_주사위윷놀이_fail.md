@@ -161,3 +161,104 @@ public class bj_17825_주사위윷놀이 {
 }
 
 ```
+
+
+### 두번째 코드
+```
+package SW역량테스트;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.StringTokenizer;
+
+public class bj_17825_주사위윷놀이2 {
+	
+	static int[] score= {2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,13,16,19,22,24,28,27,26,25,30,35};//길 인덱스에 따른 점수
+	static int[][] roadArr= { //길 정보
+			{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19}, //1번길 길 인덱스
+			{4,20,21,22,28,29,30,19}, //2번길
+			{9,23,24,28,29,30,19}, //3번길
+			{14,25,26,27,28,29,30,19} //4번길
+	};
+	static int maxScore, dice[], horse[][];
+	static boolean[] visit;
+	static BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+	static StringTokenizer st;
+	
+	public static void main(String[] args) throws IOException {
+	
+		maxScore=0;
+		dice=new int[10];
+		horse=new int[4][2]; //[말][road, road에서의 위치]
+		visit=new boolean[31];
+		
+		st=new StringTokenizer(br.readLine());
+		for (int i = 0; i < 10; i++) {
+			dice[i]=Integer.parseInt(st.nextToken());
+		}
+		
+		for (int i = 0; i < 4; i++) {
+			horse[i][1]=-1;
+		}
+		
+		dfs(0,0);
+		
+		System.out.println(maxScore);
+	}
+
+	private static void dfs(int cnt, int sum) {
+		
+		if(cnt==10) {
+			maxScore=Math.max(maxScore, sum);
+			return;
+		}
+		
+		for (int h = 0; h < 4; h++) {
+			
+			//도착한 말
+			if(horse[h][1]==-2) dfs(cnt+1, sum);
+			
+			//현재 위치가 파란색 위치이면 road변경
+			if(horse[h][1]!=-1) {
+				if(roadArr[horse[h][0]][horse[h][1]]==4) {horse[h][0]=1; horse[h][1]=0;}
+				if(roadArr[horse[h][0]][horse[h][1]]==9) {horse[h][0]=2; horse[h][1]=0;}
+				if(roadArr[horse[h][0]][horse[h][1]]==14) {horse[h][0]=3; horse[h][1]=0;}
+			}
+			//현재 위치
+			int Road=horse[h][0];
+			int nowRoadPos=horse[h][1];
+			
+			//가야할 곳이 도착을 넘음
+			int nextRoadPos=nowRoadPos+dice[cnt];
+			
+			if(nextRoadPos>=roadArr[Road].length) {
+				horse[h][1]=-2;
+				dfs(cnt+1, sum);
+				horse[h][1]=nowRoadPos;
+			}
+			else {
+				//이미 말 있음
+				int nextIdx=roadArr[Road][nextRoadPos];
+				if(visit[nextIdx]) continue;
+				
+				//가야할 곳으로 옮겨줌
+				horse[h][1]=nextRoadPos;
+				visit[nextIdx]=true;
+				
+				//dfs
+				dfs(cnt+1, sum+score[nextIdx]);
+				
+				//되돌리기
+				horse[h][1]=nowRoadPos;
+				visit[nextIdx]=false;
+			}
+		}
+		
+	}
+	
+}
+
+```
