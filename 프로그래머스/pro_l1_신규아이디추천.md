@@ -2,12 +2,15 @@
 https://programmers.co.kr/learn/courses/30/lessons/72410
 
 <br>
+
 ### 솔루션
+
 - 단순하게 string에 대한 함수를 이용해서 조건을 만족해주는 것라고 생각해서
 - `replace`, `charAt`, `substring`,`length`, `isempty`함수를 이용하여 문제를 풀었다.
 - 하지만 다른 사람 코드를 보니 `정규표현식(regex)`를 이용하면 코드를 짧게 짤 수 있었다.
 
 <br>
+
 ### 정규 표현식(regex)
 ```
 참고 블로그: https://nesoy.github.io/articles/2018-06/Java-RegExp
