@@ -13,7 +13,9 @@ https://programmers.co.kr/learn/courses/30/lessons/72410
 
 ### 정규 표현식(regex)
 ```
-참고 블로그: https://nesoy.github.io/articles/2018-06/Java-RegExp
+참고 블로그: 
+https://nesoy.github.io/articles/2018-06/Java-RegExp
+https://yulsfamily.tistory.com/232
 ```
 
 <br>
